@@ -15,8 +15,10 @@
   {
    "fieldname": "name_device",
    "fieldtype": "Data",
+   "in_list_view": 1,
    "in_standard_filter": 1,
-   "label": "Name Device"
+   "label": "Name Device",
+   "reqd": 1
   },
   {
    "fieldname": "id_device",
@@ -31,16 +33,16 @@
   },
   {
    "fieldname": "location_device",
-   "fieldtype": "Data",
+   "fieldtype": "Select",
    "in_list_view": 1,
    "label": "Location Device",
-   "reqd": 1,
-   "unique": 1
+   "options": "Management\nAbu Sakhir\nAl-Mishkhab",
+   "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-02-14 13:21:58.297198",
+ "modified": "2024-02-14 14:52:56.782675",
  "modified_by": "Administrator",
  "module": "My Hrms",
  "name": "ZK Device",

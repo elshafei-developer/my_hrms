@@ -3,14 +3,28 @@
 
 import frappe
 from frappe import _
-from zk import ZK
 from frappe.model.document import Document
-
+from zk import ZK
+from  zk.finger import Finger
 
 class PIOID(Document):
 	def validate(self):
-		if self.id_employee_in_device:
-			self.fingerprints = self.id_employee_in_device
+     
+		ZK_devices = frappe.db.get_list("ZK Device", pluck = "id_device")
+		id_employee = self.id_employee_in_device
+
+		if self.fingerprints == None:
+			for device in ZK_devices:
+				print("-"*40)
+				finger = connect_zk(id_employee,device)
+				print(finger["fingerprint"])
+				if finger["fingerprint"] == False:
+					pass
+				else:
+					self.fingerprints = finger["fingerprint"]
+					# self.id_device = device
+					break
+				print("-"*40)
 	def before_insert(self):
 		employees = frappe.db.get_list("PIO ID", pluck="employee")
 		exists_employee = frappe.db.exists({"doctype": "PIO ID", "id_employee_in_device": self.id_employee_in_device})
@@ -20,26 +34,29 @@ class PIOID(Document):
 		if exists_employee:
 			frappe.throw(f"The Employee {exists_employee} has ID {self.id_employee_in_device} already")
 			
-def connect_zk(employee_id,device):
+def connect_zk(employee_id,id_device):
 	conn = None
-	zk = ZK(device['id_device'])
+	print(id_device)
+	zk = ZK(id_device)
 	try:
+		print("connecting to device")
 		conn = zk.connect()
 		conn.disable_device()
-		users = conn.get_users()
-		for user in users:
-			if(user.user_id == employee_id):
-				return True
-		conn.test_voice()
-		conn.enable_device()
-	except Exception as e:
-		# return False
-		pass
 
-# def send_data_to_js(data):
-# 	# Publish data to the specified channel
-# 	frappe.publish_realtime('my_custom_channel', data)
- 
-# @frappe.whitelist()
-# def move_to_custom_doctype(name,ID):
-#     return {"message": f"The Employee {name} has ID {ID} Do you want update information this Employee ?"}
+		template = conn.get_user_template(uid=int(employee_id), temp_id=6)
+
+		if template.template == b'':
+			print(f"ID {employee_id} has no fingerprint")
+			conn.test_voice()
+			conn.enable_device()
+			return {"fingerprint": False, "message": f"ID {employee_id} has no fingerprint"}
+		else:
+			print(f"ID {employee_id} has fingerprint")
+			finger = Finger(uid=template.uid, fid=template.fid,valid=template.valid, template=template.template)
+			finger_json = finger.json_pack()
+			conn.test_voice()
+			conn.enable_device()
+			return {"fingerprint": finger_json, "message": f"ID {employee_id} has fingerprint"}
+
+	except Exception as e:
+		return {"fingerprint": False, "message": f"Error: {e}"}
