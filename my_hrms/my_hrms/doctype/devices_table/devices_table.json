@@ -1,0 +1,47 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "Device.#####",
+ "creation": "2024-02-13 17:06:37.780582",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "location_device",
+  "column_break_qock",
+  "id_device"
+ ],
+ "fields": [
+  {
+   "fieldname": "location_device",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Location Device",
+   "options": "ZK Device"
+  },
+  {
+   "fieldname": "column_break_qock",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "location_device.id_device",
+   "fieldname": "id_device",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "ID Device"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2024-02-13 18:17:57.237667",
+ "modified_by": "Administrator",
+ "module": "My Hrms",
+ "name": "Devices Table",
+ "naming_rule": "Expression (old style)",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

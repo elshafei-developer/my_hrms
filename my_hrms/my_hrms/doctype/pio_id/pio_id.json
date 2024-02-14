@@ -1,0 +1,113 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "field:full_name",
+ "creation": "2024-02-13 13:38:06.404723",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "employee",
+  "full_name",
+  "column_break_sjrp",
+  "id_employee_in_device",
+  "image",
+  "section_break_wvlg",
+  "fingerprint_devices",
+  "pio_id_section",
+  "fingerprints",
+  "column_break_ryaj",
+  "photo"
+ ],
+ "fields": [
+  {
+   "fieldname": "employee",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Employee",
+   "options": "Employee",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "fingerprint_devices",
+   "fieldtype": "Table",
+   "label": "Fingerprint devices that accept the employee",
+   "options": "Devices Table",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_sjrp",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "employee.employee_name",
+   "fieldname": "full_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Full Name",
+   "read_only": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "section_break_wvlg",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "pio_id_section",
+   "fieldtype": "Section Break",
+   "label": "PIO ID"
+  },
+  {
+   "fieldname": "fingerprints",
+   "fieldtype": "Data",
+   "label": "Fingerprints"
+  },
+  {
+   "fieldname": "column_break_ryaj",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "photo",
+   "fieldtype": "Data",
+   "label": "Photo"
+  },
+  {
+   "fetch_from": "employee.image",
+   "fieldname": "image",
+   "fieldtype": "Attach Image",
+   "hidden": 1,
+   "label": "Image"
+  },
+  {
+   "fieldname": "id_employee_in_device",
+   "fieldtype": "Data",
+   "label": "Employee ID"
+  }
+ ],
+ "image_field": "image",
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-02-13 21:46:51.666074",
+ "modified_by": "Administrator",
+ "module": "My Hrms",
+ "name": "PIO ID",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

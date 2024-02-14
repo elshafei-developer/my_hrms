@@ -6,6 +6,11 @@ app_email = "hassanhusseinmohammed.as@gmail.com"
 app_license = "mit"
 # required_apps = []
 
+
+
+# ME to record custom doctype
+fixtures = ["Custom Field"]
+
 # Includes in <head>
 # ------------------
 
