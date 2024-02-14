@@ -81,13 +81,14 @@
   {
    "fieldname": "id_employee_in_device",
    "fieldtype": "Data",
-   "label": "Employee ID"
+   "label": "Employee ID",
+   "reqd": 1
   }
  ],
  "image_field": "image",
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-02-13 21:46:51.666074",
+ "modified": "2024-02-14 11:01:40.984269",
  "modified_by": "Administrator",
  "module": "My Hrms",
  "name": "PIO ID",
