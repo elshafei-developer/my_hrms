@@ -11,20 +11,21 @@
   "column_break_sjrp",
   "id_employee_in_device",
   "image",
-  "section_break_wvlg",
-  "fingerprint_devices",
-  "pio_id_section",
-  "name_fingerprint_device",
-  "column_break_gs2o",
-  "location_device",
   "section_break_johi",
+  "zk_device",
   "taking_a_fingerprint",
   "column_break_mkyg",
-  "take_a_picture",
+  "id_device",
+  "has_fingerprint",
+  "section_break_wvlg",
+  "fingerprint_devices",
   "section_break_hxdp",
   "fingerprints",
   "column_break_oqdi",
-  "photo"
+  "photo",
+  "fingerprint_information_section",
+  "finger_size",
+  "finger_template"
  ],
  "fields": [
   {
@@ -62,13 +63,8 @@
    "label": "Fingerprint devices that accept the employee"
   },
   {
-   "fieldname": "pio_id_section",
-   "fieldtype": "Section Break",
-   "label": "Choose a fingerprinting device"
-  },
-  {
    "fieldname": "fingerprints",
-   "fieldtype": "Autocomplete",
+   "fieldtype": "Data",
    "label": "Fingerprints",
    "read_only": 1
   },
@@ -87,33 +83,15 @@
   },
   {
    "fieldname": "id_employee_in_device",
-   "fieldtype": "Data",
+   "fieldtype": "Int",
    "label": "Employee ID",
    "reqd": 1,
    "unique": 1
   },
   {
-   "fieldname": "name_fingerprint_device",
-   "fieldtype": "Link",
-   "label": "Name Fingerprint Device",
-   "options": "ZK Device"
-  },
-  {
    "fieldname": "taking_a_fingerprint",
    "fieldtype": "Button",
    "label": "Taking a fingerprint"
-  },
-  {
-   "fetch_from": "name_fingerprint_device.location_device",
-   "fieldname": "location_device",
-   "fieldtype": "Data",
-   "label": "Location Device",
-   "read_only": 1
-  },
-  {
-   "fieldname": "take_a_picture",
-   "fieldtype": "Button",
-   "label": "take a picture"
   },
   {
    "fieldname": "section_break_hxdp",
@@ -124,10 +102,6 @@
    "fieldtype": "Column Break"
   },
   {
-   "fieldname": "column_break_gs2o",
-   "fieldtype": "Column Break"
-  },
-  {
    "fieldname": "section_break_johi",
    "fieldtype": "Section Break",
    "label": "Take PIO ID"
@@ -135,12 +109,49 @@
   {
    "fieldname": "column_break_mkyg",
    "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "fingerprint_information_section",
+   "fieldtype": "Section Break",
+   "label": "Fingerprint Information"
+  },
+  {
+   "fieldname": "finger_size",
+   "fieldtype": "Int",
+   "label": "Finger Size",
+   "read_only": 1
+  },
+  {
+   "fieldname": "finger_template",
+   "fieldtype": "Long Text",
+   "label": "Finger Template",
+   "read_only": 1
+  },
+  {
+   "fieldname": "zk_device",
+   "fieldtype": "Link",
+   "label": "ZK Device",
+   "options": "ZK Device"
+  },
+  {
+   "default": "Yes",
+   "fieldname": "has_fingerprint",
+   "fieldtype": "Select",
+   "label": "Does the employee have a fingerprint on the fingerprint device?",
+   "options": "Yes\nNo"
+  },
+  {
+   "fetch_from": "zk_device.id_device",
+   "fieldname": "id_device",
+   "fieldtype": "Data",
+   "label": "ID Device",
+   "read_only": 1
   }
  ],
  "image_field": "image",
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-02-14 22:56:17.504782",
+ "modified": "2024-02-15 21:38:48.473155",
  "modified_by": "Administrator",
  "module": "My Hrms",
  "name": "PIO ID",
