@@ -1,7 +1,12 @@
 // Copyright (c) 2024, hassan hussein mohammed and contributors
 // For license information, please see license.txt
 let dialogOpened = false;
-frappe.ui.form.on("PIO ID", {
+frappe.ui.form.on("BioID", {
+  employee: function (frm) {
+    frm.fields_dict.employee.$input.on("change", function () {
+      employee = frappe.console.log("employee changed");
+    });
+  },
   taking_a_fingerprint: function (frm) {
     if (!dialogOpened) {
       frm.fields_dict.taking_a_fingerprint.$input.on("click", function () {
@@ -16,7 +21,7 @@ frappe.ui.form.on("PIO ID", {
           showLoadingIndicator(frm);
           dialogOpened = true;
           frappe.call({
-            method: "my_hrms.my_hrms.doctype.pio_id.pio_id.get_fingerprint",
+            method: "my_hrms.my_hrms.doctype.bioid.bioid.get_fingerprint",
             args: {
               data: {
                 employee,

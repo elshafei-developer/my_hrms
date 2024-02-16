@@ -104,7 +104,7 @@
   {
    "fieldname": "section_break_johi",
    "fieldtype": "Section Break",
-   "label": "Take PIO ID"
+   "label": "Take BioID"
   },
   {
    "fieldname": "column_break_mkyg",
@@ -151,10 +151,10 @@
  "image_field": "image",
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-02-15 21:38:48.473155",
+ "modified": "2024-02-16 09:49:54.048971",
  "modified_by": "Administrator",
  "module": "My Hrms",
- "name": "PIO ID",
+ "name": "BioID",
  "naming_rule": "By fieldname",
  "owner": "Administrator",
  "permissions": [

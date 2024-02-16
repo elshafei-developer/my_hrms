@@ -5,5 +5,5 @@
 from frappe.tests.utils import FrappeTestCase
 
 
-class TestPIOID(FrappeTestCase):
+class TestBioID(FrappeTestCase):
 	pass
