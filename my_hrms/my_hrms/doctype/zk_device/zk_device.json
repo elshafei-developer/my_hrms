@@ -1,48 +1,79 @@
 {
  "actions": [],
  "allow_rename": 1,
- "autoname": "format:{name_device}",
+ "autoname": "format:{device_name}",
  "creation": "2024-02-13 11:28:39.289114",
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
-  "name_device",
-  "id_device",
+  "device_name",
+  "device_ip",
   "column_break_hfrk",
-  "location_device"
+  "device_location",
+  "section_break_crrt",
+  "data",
+  "time",
+  "bioid"
  ],
  "fields": [
-  {
-   "fieldname": "name_device",
-   "fieldtype": "Data",
-   "in_list_view": 1,
-   "in_standard_filter": 1,
-   "label": "Name Device",
-   "reqd": 1
-  },
-  {
-   "fieldname": "id_device",
-   "fieldtype": "Data",
-   "in_list_view": 1,
-   "label": "ID Device",
-   "reqd": 1
-  },
   {
    "fieldname": "column_break_hfrk",
    "fieldtype": "Column Break"
   },
   {
-   "fieldname": "location_device",
-   "fieldtype": "Select",
-   "in_list_view": 1,
-   "label": "Location Device",
-   "options": "Management\nAbu Sakhir\nAl-Mishkhab",
+   "fieldname": "device_ip",
+   "fieldtype": "Data",
+   "label": "Device IP",
    "reqd": 1
+  },
+  {
+   "fieldname": "device_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Device Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "device_location",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Device Location",
+   "options": "Branch",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_crrt",
+   "fieldtype": "Section Break",
+   "label": "TEST"
+  },
+  {
+   "fieldname": "data",
+   "fieldtype": "Data",
+   "is_virtual": 1,
+   "label": "Data",
+   "options": "f\"This Is {doc.time}.\""
+  },
+  {
+   "fieldname": "time",
+   "fieldtype": "Data",
+   "label": "Time"
+  },
+  {
+   "fieldname": "bioid",
+   "fieldtype": "Link",
+   "label": "BioID",
+   "options": "BioID"
   }
  ],
  "index_web_pages_for_search": 1,
- "links": [],
- "modified": "2024-02-14 14:52:56.782675",
+ "links": [
+  {
+   "link_doctype": "BioID",
+   "link_fieldname": "employee"
+  }
+ ],
+ "modified": "2024-02-22 11:09:00.582943",
  "modified_by": "Administrator",
  "module": "My Hrms",
  "name": "ZK Device",

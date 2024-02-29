@@ -11,12 +11,6 @@
   "column_break_sjrp",
   "id_employee_in_device",
   "image",
-  "section_break_johi",
-  "zk_device",
-  "taking_a_fingerprint",
-  "column_break_mkyg",
-  "id_device",
-  "has_fingerprint",
   "section_break_wvlg",
   "fingerprint_devices",
   "section_break_hxdp",
@@ -24,8 +18,8 @@
   "column_break_oqdi",
   "photo",
   "fingerprint_information_section",
-  "finger_size",
-  "finger_template"
+  "fingerprints_template",
+  "icon"
  ],
  "fields": [
   {
@@ -82,16 +76,13 @@
    "label": "Image"
   },
   {
+   "fetch_from": "employee.attendance_device_id",
    "fieldname": "id_employee_in_device",
-   "fieldtype": "Int",
+   "fieldtype": "Data",
    "label": "Employee ID",
+   "read_only": 1,
    "reqd": 1,
    "unique": 1
-  },
-  {
-   "fieldname": "taking_a_fingerprint",
-   "fieldtype": "Button",
-   "label": "Taking a fingerprint"
   },
   {
    "fieldname": "section_break_hxdp",
@@ -102,56 +93,25 @@
    "fieldtype": "Column Break"
   },
   {
-   "fieldname": "section_break_johi",
-   "fieldtype": "Section Break",
-   "label": "Take BioID"
-  },
-  {
-   "fieldname": "column_break_mkyg",
-   "fieldtype": "Column Break"
-  },
-  {
    "fieldname": "fingerprint_information_section",
    "fieldtype": "Section Break",
    "label": "Fingerprint Information"
   },
   {
-   "fieldname": "finger_size",
-   "fieldtype": "Int",
-   "label": "Finger Size",
-   "read_only": 1
+   "fieldname": "fingerprints_template",
+   "fieldtype": "JSON",
+   "label": "Fingerprints template"
   },
   {
-   "fieldname": "finger_template",
-   "fieldtype": "Long Text",
-   "label": "Finger Template",
-   "read_only": 1
-  },
-  {
-   "fieldname": "zk_device",
-   "fieldtype": "Link",
-   "label": "ZK Device",
-   "options": "ZK Device"
-  },
-  {
-   "default": "Yes",
-   "fieldname": "has_fingerprint",
-   "fieldtype": "Select",
-   "label": "Does the employee have a fingerprint on the fingerprint device?",
-   "options": "Yes\nNo"
-  },
-  {
-   "fetch_from": "zk_device.id_device",
-   "fieldname": "id_device",
-   "fieldtype": "Data",
-   "label": "ID Device",
-   "read_only": 1
+   "fieldname": "icon",
+   "fieldtype": "Icon",
+   "label": "icon"
   }
  ],
  "image_field": "image",
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-02-16 09:49:54.048971",
+ "modified": "2024-02-29 17:18:26.561356",
  "modified_by": "Administrator",
  "module": "My Hrms",
  "name": "BioID",

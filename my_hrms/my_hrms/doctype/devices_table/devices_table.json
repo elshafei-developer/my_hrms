@@ -8,13 +8,13 @@
  "engine": "InnoDB",
  "field_order": [
   "name_device",
-  "id_device",
+  "ip_device",
   "column_break_qock",
   "location_device"
  ],
  "fields": [
   {
-   "fetch_from": "name_device.location_device",
+   "fetch_from": "name_device.device_location",
    "fieldname": "location_device",
    "fieldtype": "Data",
    "in_list_view": 1,
@@ -26,26 +26,25 @@
    "fieldtype": "Column Break"
   },
   {
-   "fetch_from": "name_device.id_device",
-   "fieldname": "id_device",
-   "fieldtype": "Data",
-   "in_list_view": 1,
-   "label": "ID Device",
-   "read_only": 1
-  },
-  {
    "fieldname": "name_device",
    "fieldtype": "Link",
    "in_list_view": 1,
    "label": "Name Device",
    "options": "ZK Device",
    "reqd": 1
+  },
+  {
+   "fetch_from": "name_device.device_ip",
+   "fieldname": "ip_device",
+   "fieldtype": "Data",
+   "label": "IP Device",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2024-02-15 11:24:14.963232",
+ "modified": "2024-02-18 11:22:48.558735",
  "modified_by": "Administrator",
  "module": "My Hrms",
  "name": "Devices Table",

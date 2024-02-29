@@ -16,7 +16,7 @@ fixtures = ["Custom Field"]
 
 # include js, css files in header of desk.html
 # app_include_css = "/assets/my_hrms/css/my_hrms.css"
-# app_include_js = "/assets/my_hrms/js/my_hrms.js"
+# app_include_js = "/assets/my_hrms/js/employee/employee.js"
 
 # include js, css files in header of web template
 # web_include_css = "/assets/my_hrms/css/my_hrms.css"
@@ -26,14 +26,15 @@ fixtures = ["Custom Field"]
 # website_theme_scss = "my_hrms/public/scss/website"
 
 # include js, css files in header of web form
-# webform_include_js = {"doctype": "public/js/doctype.js"}
+# {"Employee": "public/js/employee/employee.js"}
+# webform_include_js = {"Employee": "public/js/employee/employee.js"}
 # webform_include_css = {"doctype": "public/css/doctype.css"}
 
 # include js in page
 # page_js = {"page" : "public/js/file.js"}
 
 # include js in doctype views
-# doctype_js = {"doctype" : "public/js/doctype.js"}
+doctype_js = {"Employee": "overrides/employee/employee.js"}
 # doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
 # doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}
 # doctype_calendar_js = {"doctype" : "public/js/doctype_calendar.js"}
@@ -119,9 +120,9 @@ fixtures = ["Custom Field"]
 # ---------------
 # Override standard doctype classes
 
-# override_doctype_class = {
-# 	"ToDo": "custom_app.overrides.CustomToDo"
-# }
+override_doctype_class = {
+	"Employee": "my_hrms.overrides.employee.employee.CustomEmployee"
+}
 
 # Document Events
 # ---------------
@@ -226,7 +227,7 @@ fixtures = ["Custom Field"]
 # ]
 
 # Automatically update python controller files with type annotations for this app.
-# export_python_type_annotations = True
+export_python_type_annotations = True
 
 # default_log_clearing_doctypes = {
 # 	"Logging DocType Name": 30  # days to retain logs
