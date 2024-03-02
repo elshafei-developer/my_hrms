@@ -18,8 +18,8 @@
   "column_break_oqdi",
   "photo",
   "fingerprint_information_section",
-  "fingerprints_template",
-  "icon"
+  "templates_table",
+  "fingerprints_template"
  ],
  "fields": [
   {
@@ -103,15 +103,16 @@
    "label": "Fingerprints template"
   },
   {
-   "fieldname": "icon",
-   "fieldtype": "Icon",
-   "label": "icon"
+   "fieldname": "templates_table",
+   "fieldtype": "Table",
+   "label": "Templates Table",
+   "options": "Templates table"
   }
  ],
  "image_field": "image",
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-02-29 17:18:26.561356",
+ "modified": "2024-03-02 14:45:06.295197",
  "modified_by": "Administrator",
  "module": "My Hrms",
  "name": "BioID",

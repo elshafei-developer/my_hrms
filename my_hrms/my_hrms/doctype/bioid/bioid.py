@@ -16,6 +16,7 @@ class BioID(Document):
 	if TYPE_CHECKING:
 		from frappe.types import DF
 		from my_hrms.my_hrms.doctype.devices_table.devices_table import DevicesTable
+		from my_hrms.my_hrms.doctype.templates_table.templates_table import Templatestable
 
 		employee: DF.Link
 		fingerprint_devices: DF.Table[DevicesTable]
@@ -25,40 +26,56 @@ class BioID(Document):
 		id_employee_in_device: DF.Data
 		image: DF.AttachImage | None
 		photo: DF.Data | None
+		templates_table: DF.Table[Templatestable]
 	# end: auto-generated types
 	def validate(self):
 		pass
 
 @frappe.whitelist()
-def receive_finger_template(data):
-	data_json = json.loads(data)
-	employee_id = data_json['employee_id']
-	employee_name = data_json['employee_name']
-	zk_name = data_json['zk_device']
-	finger_index = data_json['finger_index']
-	zk_devices_ip = frappe.db.get_value("ZK Device", zk_name ,"device_ip")
-
+def receive_finger_template(employee , zk_device, finger_index):
+	employee = frappe.get_doc('Employee',employee)
+	zk_device = frappe.get_doc('ZK Device', zk_device)
+	bioid = frappe.get_doc("BioID" , employee.employee_name)
+	
+	# information Employee
+	employee_id = employee.attendance_device_id
+	employee_name = employee.employee_name
+	# information Device ZK
+	device_name = zk_device.device_name
+	device_ip = zk_device.device_ip
+	
+ 
 	conn = None
-	zk = ZK(zk_devices_ip)
+	zk = ZK(device_ip,timeout=2)
 	try:
 		print("connecting to device")
 		conn = zk.connect()
 		conn.disable_device()
+
 		time_today = datetime.today()
 		conn.set_time(time_today)
-		conn.test_voice()
+		# conn.test_voice()
+
 		conn.set_user(uid=int(employee_id), name=employee_name,user_id=str(employee_id))
 		conn.delete_user_template(uid=int(employee_id),temp_id=int(finger_index))
-		conn.enroll_user(uid=int(employee_id),temp_id=int(finger_index),user_id=str(employee_id))	
+		conn.enroll_user(uid=int(employee_id),temp_id=int(finger_index),user_id=str(employee_id))
+
 		template = conn.get_user_template(uid=int(employee_id), temp_id=int(finger_index))
 		enroll_finger = bool(template) == False or template.template == b''
 		if enroll_finger:
 			conn.enable_device()
-			return {"status": False, "message": f"The fingerprint was not captured"}
+			return {"status": False,"color":"red", "message": f"The fingerprint was not captured"}
 		else:
 			template = conn.get_user_template(uid=int(employee_id), temp_id=int(finger_index))
 			finger_json = template.json_pack()
+			#  complete remove old finger for same finger index
+			# for finger in bioid.templates_table:
+			# 		if str(finger_json['fid']) == str(finger.fid):
+			# 			bioid._table_fieldnames()
+			# 			print("Yes")
+			bioid.append("templates_table",finger_json)
+			bioid.save()
 			conn.enable_device()
-			return {"status": True, "fingerprints_template":finger_json ,"message": f"Add {employee_name} successful, With Finger Index {finger_index}"}
+			return {"status": True,"color":"green", "fingerprints_template":finger_json ,"message": _(f"The fingerprint of employee {employee_name} was successfully registered")}
 	except Exception as e:
-			return {"status": False, "message": f"Error => {zk_name} Device {e}"}
+			return {"status": False,"color": "red", "message" : _(f"Error in {device_name} the Error => {e}")}
