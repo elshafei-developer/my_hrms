@@ -46,7 +46,7 @@ def receive_finger_template(employee , zk_device, finger_index):
 	
  
 	conn = None
-	zk = ZK(device_ip,timeout=2)
+	zk = ZK(device_ip)
 	try:
 		print("connecting to device")
 		conn = zk.connect()
@@ -68,13 +68,17 @@ def receive_finger_template(employee , zk_device, finger_index):
 		else:
 			template = conn.get_user_template(uid=int(employee_id), temp_id=int(finger_index))
 			finger_json = template.json_pack()
-			#  complete remove old finger for same finger index
-			# for finger in bioid.templates_table:
-			# 		if str(finger_json['fid']) == str(finger.fid):
-			# 			bioid._table_fieldnames()
-			# 			print("Yes")
-			bioid.append("templates_table",finger_json)
-			bioid.save()
+			is_finger_existing = False
+			for finger in bioid.templates_table:
+				if str(finger_json['fid']) == str(finger.fid):
+					is_finger_existing = True
+					finger.size = finger_json['size']
+					finger.template = finger_json['template']
+					bioid.save()
+					break
+			if is_finger_existing == False:
+				bioid.append("templates_table",finger_json)
+				bioid.save()
 			conn.enable_device()
 			return {"status": True,"color":"green", "fingerprints_template":finger_json ,"message": _(f"The fingerprint of employee {employee_name} was successfully registered")}
 	except Exception as e:
